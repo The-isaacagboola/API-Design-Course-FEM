@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import * as bcrypt from "bcrypt";
 
 export const createJwt = (user: { id: string; username: string }) => {
-  const token = jwt.sign(user, process.env.JWT_SCRET);
+  const token = jwt.sign(user, process.env.JWT_SECRET);
 
   return token;
 };
@@ -39,6 +39,7 @@ export const protect = async (req, res, next) => {
 
 export const hashPassword = async (password: string) => {
   const salt = await bcrypt.genSalt(10);
+  console.log(salt);
   const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
 };
