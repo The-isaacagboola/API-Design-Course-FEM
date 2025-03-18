@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import express from "express";
 
 const router = express.Router();
@@ -25,5 +26,10 @@ router.get("/updatepoints/:id", () => {});
 router.get("/updatepoints", () => {});
 router.post("/updatepoints", () => {});
 router.delete("/updatepoints/:id", () => {});
+
+// Users
+router.post("/user", (req, res) => {
+  const { username, password } = req.body;
+});
 
 export default router;
