@@ -1,3 +1,5 @@
+Course notes: https://hendrixer.github.io/API-design-v4/lessons/route-handlers/validating-inputs
+
 Install prisma
 npm i prisma prisma/client --save
 

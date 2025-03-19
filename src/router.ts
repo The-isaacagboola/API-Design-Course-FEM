@@ -1,5 +1,5 @@
-import { Prisma } from "@prisma/client";
 import express from "express";
+import { body, validationResult } from "express-validator";
 
 const router = express.Router();
 
@@ -9,6 +9,13 @@ router.get("/product", (req, res) => {
   res.json({ message: "Hello theere" });
 });
 router.get("/product/:id", () => {});
+router.put("/product/:id", body("name"), (req, res) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    res.status(400).json({ errors: errors.array() });
+  }
+});
 router.get("/product", () => {});
 router.post("/product", () => {});
 router.delete("/product/:id", () => {});

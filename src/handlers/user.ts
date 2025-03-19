@@ -54,5 +54,7 @@ export const signin = async (req, res) => {
       message: "User created successfully",
       token,
     });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };

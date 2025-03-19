@@ -5,21 +5,22 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
 }
 
+// prisma/schema.prisma
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  username  String   @unique
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now())
+  username  String    @unique
   password  String
-  products Product[]
+  products  Product[]
 }
 
 model Product {
@@ -28,8 +29,8 @@ model Product {
   name       String   @db.VarChar(255)
   belongToId String
   belongsTo  User     @relation(fields: [belongToId], references: [id])
-  updates Update[]
-  updateId String
+  updates    Update[]
+  updateId   String
 }
 
 enum UPDATE_STATUS {
@@ -39,27 +40,27 @@ enum UPDATE_STATUS {
 }
 
 model Update {
-  id String @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title String
-  body String
-  status UPDATE_STATUS @default(inprogress)
-  version String?
-  asset String?
-  productId String 
-  product Product @relation(fields: [productId], references: [id])
+  id           String         @id @default(uuid())
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  title        String
+  body         String
+  status       UPDATE_STATUS  @default(inprogress)
+  version      String?
+  asset        String?
+  productId    String
+  product      Product        @relation(fields: [productId], references: [id])
   updatePoints UpdatePoints[]
 }
 
 model UpdatePoints {
-    id String @id @default(uuid())
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  name String @db.VarChar(255)
+  name        String @db.VarChar(255)
   description String
 
-  updateId String
+  updateId       String
   belongToUpdate Update @relation(fields: [updateId], references: [id])
 }
