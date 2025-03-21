@@ -4,9 +4,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { protect } from "./modules/auth";
 import { createNewUser, signin } from "./handlers/user";
-import * as dotenv from "dotenv";
 
-dotenv.config();
 const app = express();
 app.use(morgan("dev"));
 app.use(express.json());

@@ -1,4 +1,4 @@
-import prisma from "../db";
+import prisma from "../lib/prisma";
 import { comparePassword, createJwt, hashPassword } from "../modules/auth";
 
 export const createNewUser = async (req, res) => {
@@ -28,7 +28,8 @@ export const createNewUser = async (req, res) => {
 };
 
 export const signin = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password }: { username: string; password: string } =
+    req.body;
 
   try {
     const user = await prisma.user.findUnique({
@@ -51,7 +52,7 @@ export const signin = async (req, res) => {
     const token = await createJwt({ id: user.id, username: user.username });
     req.headers["authorization"] = `Bearer ${token}`;
     res.status(201).json({
-      message: "User created successfully",
+      message: "User Signed in successfully",
       token,
     });
   } catch (error) {
