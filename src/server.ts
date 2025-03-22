@@ -11,13 +11,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+/*
 app.use((req, res, next) => {
   req.sh_secret = "doggy";
   next();
 });
 
+To show how middlewares run on every request that comes through the defined path
+*/
+
 app.get("/", (req, res) => {
-  console.log("Hello from express");
   res.status(200);
   res.json({
     message: "Hello there",

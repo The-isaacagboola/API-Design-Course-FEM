@@ -29,7 +29,7 @@ export const protect = async (req, res, next) => {
     req.user = user;
     next();
   } catch (e) {
-    console.log(e.message);
+    console.error(e.message);
     return res.status(401).json({
       message: "Provided token is incorrect",
     });
@@ -38,7 +38,6 @@ export const protect = async (req, res, next) => {
 
 export const hashPassword = async (password: string) => {
   const salt = await bcrypt.genSalt(10);
-  console.log(salt);
   const hashedPassword = await bcrypt.hash(password, salt);
   return hashedPassword;
 };

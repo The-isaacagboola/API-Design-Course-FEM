@@ -9,14 +9,14 @@ export const createNewUser = async (req, res) => {
 
   try {
     const hashedPassword = await hashPassword(password);
-    console.log(await prisma.user.findMany());
+
     const newUser = await prisma.user.create({
       data: {
         username: username,
         password: hashedPassword,
       },
     });
-
+    console.log(newUser);
     const token = createJwt({ username: newUser.username, id: newUser.id });
     res.json({ token });
   } catch (error) {
